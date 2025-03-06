@@ -24,8 +24,10 @@ export class ReservationService {
     return this.reservations.find(rsv => rsv.id === id)
   }
   addReservation(reservation: Reservation) {
+    reservation.id = Date.now().toString();
     this.reservations.push(reservation);
     this.saveReservations();
+
   }
   deleteReservation(id: string) {
     this.reservations = this.reservations.filter(rsv => rsv.id !== id);
