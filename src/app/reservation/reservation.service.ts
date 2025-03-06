@@ -6,9 +6,15 @@ import { Reservation } from '../models/reservation';
 })
 export class ReservationService {
 
-  constructor() { }
+  constructor() {
+    let savedRservations = localStorage.getItem('reservations');
+    this.reservations = savedRservations? JSON.parse(savedRservations): [];
+   }
 
   private reservations: Reservation[] = [];
+  private saveReservations(): void {
+    localStorage.setItem('reservations', JSON.stringify(this.reservations))
+  }
 
   //CRUD
   getAllReservations(): Reservation[] {
@@ -19,12 +25,16 @@ export class ReservationService {
   }
   addReservation(reservation: Reservation) {
     this.reservations.push(reservation);
+    this.saveReservations();
   }
   deleteReservation(id: string) {
     this.reservations = this.reservations.filter(rsv => rsv.id !== id);
+    this.saveReservations();
   }
   updateReservation(reservation: Reservation) {
     this.reservations = this.reservations.map(rsv => rsv.id === reservation.id ? reservation : rsv)
+    this.saveReservations();
   }
+
 
 }

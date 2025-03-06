@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
+import { ReservationService } from '../reservation/reservation.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -13,9 +14,11 @@ export class ReservationFormComponent {
 
   reservationForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) { } // Dependency injection
+  constructor(private fb: FormBuilder,private rs:ReservationService) { } // Dependency injection
   // when the component is created, Angular will inject an instance of FormBuilder into the component's constructor
   // FormBuilder is a service that provides convenient methods for generating form controls
+  //reservation service is injected into the component's constructor
+
 
   ngOnInit():void {
     this.reservationForm = this.fb.group({
@@ -30,6 +33,8 @@ export class ReservationFormComponent {
 
   onSubmit() {
     if (this.reservationForm.invalid) return console.warn('Invalid form');
-    console.warn(this.reservationForm.value);
+    let newRservation = (this.reservationForm.value);
+    this.rs.addReservation(newRservation);
+    this.reservationForm.reset();
   }
 }
