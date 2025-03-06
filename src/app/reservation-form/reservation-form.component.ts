@@ -1,26 +1,35 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-reservation-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.css',
   // standalone: false,
 })
 export class ReservationFormComponent {
-  reservationForm: FormGroup = new FormGroup({
-    // firstName: new FormControl(''),
-    // lastName: new FormControl(''),
-    // address: new FormGroup({
-    //   street: new FormControl(''),
-    //   city: new FormControl(''),
-    //   state: new FormControl(''),
-    //   zip: new FormControl(''),
-    // }),
-  });;
+
+  reservationForm: FormGroup = new FormGroup({});
+
+  constructor(private fb: FormBuilder) { } // Dependency injection
+  // when the component is created, Angular will inject an instance of FormBuilder into the component's constructor
+  // FormBuilder is a service that provides convenient methods for generating form controls
+
+  ngOnInit():void {
+    this.reservationForm = this.fb.group({
+      checkInDate: ['', Validators.required],
+      checkOutDate: ['', Validators.required],
+      roomNumber: ['', Validators.required],
+      guestName: ['', Validators.required],
+      guestEmail: ['', [Validators.required,Validators.email]],
+    })
+  }
+
 
   onSubmit() {
+    if (this.reservationForm.invalid) return console.warn('Invalid form');
     console.warn(this.reservationForm.value);
   }
 }
