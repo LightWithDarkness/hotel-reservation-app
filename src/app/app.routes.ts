@@ -7,5 +7,6 @@ export const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "new", component:ReservationFormComponent }, 
     // {path:"all-reservations",loadChildren:()=>import('./reservation/reservation.module').then(m=>m.ReservationModule)}, //lazy loading
-    {path:"all",component:ReservationListComponent}
+    {path:"all",component:ReservationListComponent},
+    {path:"edit/:id",component:ReservationFormComponent}
 ];

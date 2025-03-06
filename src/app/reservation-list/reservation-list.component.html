@@ -1,3 +1,6 @@
+<app-home> </app-home>
+
+
 <h3 class="mt-5 mb-3">Reservation List</h3>
 
 <table class="table table-striped">
@@ -20,15 +23,15 @@
             <td>{{reservation.checkoutDate}}</td>
             <td>
                 <button class="btn btn-sm btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
-                <!-- <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', reservation.id]">Edit</button> -->
+                <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', reservation.id]">Edit</button>
             </td>
         </tr>
     </tbody>
 </table>
 
-<!-- <ul *ngIf="reservations.length; else noReservation"> -->
+<ul *ngIf="reservations.length; else noReservation">
 
-<!-- </ul> -->
+</ul>
 
 <ng-template #noReservation>
     <p>No reservation available.</p>

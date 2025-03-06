@@ -27,6 +27,9 @@ import { HomeComponent } from './home.component'; // Import it
     RouterModule,
     HomeComponent // ✅ Import it instead of declaring it
   ],
+  exports:[
+    HomeComponent
+  ]
 })
 export class HomeModule { }
 
